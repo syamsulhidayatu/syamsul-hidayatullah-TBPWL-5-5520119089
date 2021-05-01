@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Kategori Produk')
+@section('title', 'user')
 
 @section('content_header')
-<h1 class="text-center text-bold">KATEGORI PRODUK</h1>
+<h1 class="text-center text-bold">USERS</h1>
 @stop
 @section('content')
 <div class="container">
@@ -11,41 +11,51 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Kategori Produk Setting') }}
+                    {{ __('Setting') }}
 
                 </div>
                 <div class="card-body">
-                    <button class="btn btn-primary float-left mr-3" data-toggle="modal" data-target="#modalTambahData"><i class="fa fa-plus"></i> MENAMBAHKAN KATEGORI</button>
-
+                    <but class="btn btn-primary float-left mr-3" data-toggle="modal" data-target="#modalTambahUser"><i class="fa fa-plus"></i> TAMBAH AKUN</but>
                     <div class="btn-group mb-5" role="group" aria-label="Basis Example">
-
                     </div>
                     <table id="table-data" class="table table-borderer display nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <th>NO</th>
-                                <th>NAMA KATEGORI PRODUK</th>
-                                <th>KETERANGAN</th>
+                                <th>FOTO</th>
+                                <th>NAMA</th>
+                                <th>EMAIL</th>
+                                <th>PASSWORD</th>
+                                <th>JABATAN/ROLE</th>
                                 <th>ACTION</th>
-
                             </tr>
                         </thead>
                         <tbody>
                             @php $no=1; @endphp
-                            @foreach($kategori as $key)
+                            @foreach($users as $pengguna)
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td>{{$key->name}}</td>
-                                <td>{{$key->description}}</td>
                                 <td>
-                                    <div class="btn-group" roles="group" aria-label="Basic Example">
-                                        <button type="button" id="btn-edit-categories" class="btn" data-toggle="modal" data-target="#modalEdit" data-id="{{ $key->id }}" data-name="{{ $key->name }}" data-description="{{ $key->description }}"><i class="fa fa-edit"></i></button>
-                                        <button type="button" id="btn-delete-categories" class="btn" data-toggle="modal" data-target="#modalDeleteData" data-id="{{ $key->id }}" data-name="{{$key->name}}"><i class="fa fa-trash"></i></button>
+                                    @if($pengguna->photo !== null)
+                                    <img src="{{ asset('storage/photo_user/'.$pengguna->photo) }}" width="100px" />
+                                    @else
+                                    [Picture Not Found]
+                                    @endif
+                                </td>
+                                <td>{{$pengguna->name}}</td>
+                                <td>{{$pengguna->email}}</td>
+                                <td>{{$pengguna->password}}</td>
+                                <td>{{$pengguna->roles_id}}</td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" id="btn-edit-user" class="btn" data-toggle="modal" data-target="#modalEdit" data-id="{{ $pengguna->id }}" data-photo="{{$pengguna->photo}}" data-name="{{$pengguna->name}}" data-username="{{$pengguna->username}}" data-email="{{$pengguna->email}}" data-password="{{$pengguna->password}}" data-roles_id="{{$pengguna->roles_id}}"><i class="fas fa-user-edit"></i></button>
+                                        <button type="button" id="btn-delete-user" class="btn" data-toggle="modal" data-target="#modalDelete" data-id="{{ $pengguna->id }}" data-photo="{{ $pengguna->photo }}" data-name="{{$pengguna->name}}"><i class="fas fa-user-times"></i></i></button>
                                     </div>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -53,28 +63,56 @@
     </div>
 </div>
 
-<!-- Modal Tambah Data Kategori Produk -->
-
-<div class="modal fade" id="modalTambahData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Tambah User/Admin  -->
+<div class="modal fade" id="modalTambahUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kategori Produk</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Akun User/Admin</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{ route('admin.kategori.submit') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.user.submit') }}" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label for="name">Nama Kategori Produk</label>
-                        <input type="text" class="form-control" placeholder="Masukan kategori Produk" name="name" id="name" required />
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="form-group .col-md-6 mr-5">
+                                <label for="name">Nama</label>
+                                <input type="text" placeholder="Masukan Nama" class="form-control" name="name" id="name" required />
+                            </div>
+                            <div class="form-group .col-md-6 .ml-auto">
+                                <label for="username">Username</label>
+                                <input type="text" placeholder="Masukan username" class="form-control" name="username" id="username" required />
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="description">Keterangan Produk</label>
-                        <textarea class="form-control" aria-label="With textarea" placeholder="Masukan keterangan kategori" name="description" id="description" required></textarea>
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" placeholder="Masukan Email" name="email" id="email" required />
                     </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input min="1" type="password" class="form-control" placeholder="Masukan password" name="password" id="password" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="roles_id">Jabatan/Role
+                        <Role></Role></label>
+                        <div class="input-group">
+                            <select class="custom-select" name="roles_id" placeholder="Masukan role anda" id="roles_id" aria-label="Example select with button addon">
+                                <option selected>Pilih Jabatan/role</option>
+                                <option value="1">Admin</option>
+                                <option value="2">User</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Foto Profil</label>
+                        <input type="file" class="form-control" placeholder="Masukan foto anda" name="photo" id="photo" />
+                    </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -84,38 +122,64 @@
         </div>
     </div>
 </div>
-<!-- Modal Tambah Data Kategori Produk -->
+<!-- Modal Tambah User/Admin  -->
 
-<!-- Modal Edit Data Kategori Produk -->
+<!-- Modal Edit User/Admin -->
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Kategori Produk</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Akun User/Admin</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{ route('admin.kategori.update') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.user.update') }}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="edit-name">NAMA KATEGORI PRODUK</label>
+                                <label for="name">Nama</label>
                                 <input type="text" class="form-control" name="name" id="edit-name" required />
                             </div>
                             <div class="form-group">
-                                <label for="edit-description">KETERANGAN</label>
-                                <textarea class="form-control" aria-label="With textarea" name="description" id="edit-description" required></textarea>
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" name="username" id="edit-username" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" name="email" id="edit-email" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password Dulu</label>
+                                <input min="0" type="text" class="form-control" name="password" id="edit-password" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="roles_id">Jabatan/Role</label>
+                                <div class="input-group">
+                                    <select class="custom-select" name="roles_id" id="edit-roles_id" aria-label="Example select with button addon">
+                                        <option selected>Pilih...</option>
+                                        <option value="1">Admin</option>
+                                        <option value="2">User</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" id="image-area"></div>
+                            <div class="form-group">
+                                <label for="edit-photo">photo</label>
+                                <input type="file" class="form-control" name="photo" id="edit-photo" />
                             </div>
                         </div>
                     </div>
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="id" id="edit-id" />
-
+                <input type="hidden" name="old_photo" id="edit-old-photo" />
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 <button type="submit" class="btn btn-success">Update</button>
                 </form>
@@ -123,27 +187,27 @@
         </div>
     </div>
 </div>
+<!-- Modal Edit User/Admin -->
 
-<!-- Modal Edit Data Kategori Produk -->
-
-<!-- Modal Hapus Data Kategori Produk -->
-<div class="modal fade" id="modalDeleteData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Delete User/Admin -->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Data Kategori</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Data Akun User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Apakah anda yakin akan menghapus data Kategori <strong class="font-italic" id="delete-nama"></strong>?
-                <form method="post" action="{{ route('admin.kategori.delete') }}" enctype="multipart/form-data">
+                Apakah anda benar akan menghapus data ini <strong class="font-italic" id="delete-name"></strong>?
+                <form method="post" action="{{ route('admin.user.delete') }}" enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="id" id="delete-id" value="" />
+                <input type="hidden" name="old_photo" id="delete-old-photo" />
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-danger">Hapus</button>
                 </form>
@@ -151,29 +215,57 @@
         </div>
     </div>
 </div>
+<!-- Modal Delete User/Admin -->
 
-<!-- Modal Hapus Data Kategori Produk -->
+
+
 @stop
 
 @section('js')
 <script>
     $(function() {
-        $(document).on('click', '#btn-edit-categories', function() {
+
+        $(document).on('click', '#btn-edit-user', function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
-            let description = $(this).data('description');
+            let username = $(this).data('username');
+            let email = $(this).data('email');
+            let password = $(this).data('password');
+            let roles_id = $(this).data('roles_id');
+            let photo = $(this).data('photo');
+
+            $('#image-area').empty();
             $('#edit-name').val(name);
-            $('#edit-description').val(description);
+            $('#edit-username').val(username);
+            $('#edit-email').val(email);
+            $('#edit-password').val(password);
+            $('#edit-roles_id').val(roles_id);
             $('#edit-id').val(id);
+            $('#edit-old-photo').val(photo);
+            if (photo !== null) {
+                $('#image-area').append(
+                    "<img src='" + baseurl + "/storage/photo_user/" + photo + "' width='200px'/>"
+                );
+            } else {
+                $('#image-area').append('[Gambar tidak tersedia]');
+            }
 
         });
 
-        $(document).on('click', '#btn-delete-categories', function() {
+        $(document).on('click', '#btn-delete-user', function() {
             let id = $(this).data('id');
-            let nama = $(this).data('name');
+            let name = $(this).data('name');
+            let username = $(this).data('username');
+            let email = $(this).data('email');
+            let password = $(this).data('password');
+            let roles_id = $(this).data('roles_id');
+            let photo = $(this).data('photo');
             $('#delete-id').val(id);
-            $('#delete-nama').text(nama);
+            $('#delete-old-photo').val(photo);
+            $('#delete-name').text(name);
+            console.log("hallo");
         });
+
     });
 </script>
 @stop

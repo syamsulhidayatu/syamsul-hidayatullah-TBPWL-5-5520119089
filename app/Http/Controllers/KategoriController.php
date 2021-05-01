@@ -13,7 +13,7 @@ class KategoriController extends Controller
     {
         $user = Auth::user();
         $kategori = Categories::all();
-        return view('kategori_v', compact('user', 'kategori'));
+        return view('kategori', compact('user', 'kategori'));
     }
 
     public function add_categories(Request $req)

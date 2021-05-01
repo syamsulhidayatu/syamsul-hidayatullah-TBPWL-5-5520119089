@@ -16,7 +16,7 @@ class AkunController extends Controller
     {
         $user = Auth::user();
         $users = User::all();
-        return view('akun_v', compact('user', 'users'));
+        return view('users', compact('user', 'users'));
     }
     public function add_user(Request $req)
     {

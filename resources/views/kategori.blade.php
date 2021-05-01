@@ -1,22 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', 'Merek Produk')
+@section('title', 'kATEGORI')
 
 @section('content_header')
-<h1 class="text-center text-bold">Merek</h1>
+<h1 class="text-center text-bold">KATEGORI</h1>
 @stop
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Merek Produk') }}
+                    {{ __('Kategori Setting') }}
 
                 </div>
                 <div class="card-body">
-                    <button class="btn btn-primary float-left mr-3" data-toggle="modal" data-target="#modalTambah"><i class="fa fa-plus"></i> TAMBAH MEREK</button>
+                    <button class="btn btn-primary float-left mr-3" data-toggle="modal" data-target="#modalTambahData"><i class="fa fa-plus"></i> TAMBAH KATEGORI</button>
 
                     <div class="btn-group mb-5" role="group" aria-label="Basis Example">
 
@@ -25,24 +24,23 @@
                         <thead>
                             <tr>
                                 <th>NO</th>
-                                <th>MEREK PRODUK</th>
+                                <th>KATEGORI PRODUK</th>
                                 <th>KETERANGAN</th>
-                                <th>AKSI</th>
+                                <th>ACTION</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             @php $no=1; @endphp
-                            @foreach($merek as $key)
+                            @foreach($kategori as $key)
                             <tr>
                                 <td>{{$no++}}</td>
                                 <td>{{$key->name}}</td>
                                 <td>{{$key->description}}</td>
-
                                 <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" id="btn-edit-brands" class="btn" data-toggle="modal" data-target="#modalEdit" data-id="{{ $key->id }}"><i class="fa fa-edit"></i></button>
-                                        <button type="button" id="btn-delete-brands" class="btn" data-toggle="modal" data-target="#modalDelete" data-id="{{ $key->id }}" data-name="{{ $key->name }}"><i class="fa fa-trash"></i></button>
+                                    <div class="btn-group" roles="group" aria-label="Basic Example">
+                                        <button type="button" id="btn-edit-categories" class="btn" data-toggle="modal" data-target="#modalEdit" data-id="{{ $key->id }}" data-name="{{ $key->name }}" data-description="{{ $key->description }}"><i class="fa fa-edit"></i></button>
+                                        <button type="button" id="btn-delete-categories" class="btn" data-toggle="modal" data-target="#modalDeleteData" data-id="{{ $key->id }}" data-name="{{$key->name}}"><i class="fa fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>
@@ -55,59 +53,57 @@
     </div>
 </div>
 
-<!-- Modal Tambah Data Merek Barang -->
-<div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Tambah Data Kategori Produk -->
+
+<div class="modal fade" id="modalTambahData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Merek Produk</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kategori Produk</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{ route('admin.brand.submit') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.kategori.submit') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Nama Merek Produk</label>
-                        <input type="text" class="form-control" placeholder="Masukan nama Merek Produk" name="name" id="name" required />
+                        <label for="name">Kategori Produk</label>
+                        <input type="text" class="form-control" placeholder="Masukan kategori Produk" name="name" id="name" required />
                     </div>
                     <div class="form-group">
-                        <label for="description">Keterangan</label>
-                        <textarea class="form-control" aria-label="With textarea" placeholder="Masukan keterangan merek Produk" name="description" id="description" required></textarea>
+                        <label for="description">Keterangan Produk</label>
+                        <textarea class="form-control" aria-label="With textarea" placeholder="Masukan keterangan kategori" name="description" id="description" required></textarea>
                     </div>
-
-
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Tambah Data</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Tambah</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<!-- Modal Tambah Data Merek Barang -->
+<!-- Modal Tambah Data Kategori Produk -->
 
-
-<!-- Modal Edit Data Merek Barang -->
+<!-- Modal Edit Data Kategori Produk -->
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Data Merek Produk</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Kategori Produk</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{ route('admin.brand.update') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.kategori.update') }}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label for="edit-name">NAMA MEREK PRODUK</label>
+                                <label for="edit-name">KATEGORI PRODUK</label>
                                 <input type="text" class="form-control" name="name" id="edit-name" required />
                             </div>
                             <div class="form-group">
@@ -127,22 +123,22 @@
         </div>
     </div>
 </div>
-<!-- Modal Edit Data Merek Barang -->
 
+<!-- Modal Edit Data Kategori Produk -->
 
-<!-- Modal Delete Data Merek Barang -->
-<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Hapus Data Kategori Produk -->
+<div class="modal fade" id="modalDeleteData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Data Merek Produk</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Data Kategori</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Apakah anda yakin ingin menghapus Data Merek Produk <strong class="" id="delete-nama"></strong>?
-                <form method="post" action="{{ route('admin.brand.delete') }}" enctype="multipart/form-data">
+                Apakah anda yakin akan menghapus data Kategori <strong class="font-italic" id="delete-nama"></strong>?
+                <form method="post" action="{{ route('admin.kategori.delete') }}" enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
             </div>
@@ -155,50 +151,29 @@
         </div>
     </div>
 </div>
-<!-- Modal Delete Data Merek Barang -->
 
-
-
-
+<!-- Modal Hapus Data Kategori Produk -->
 @stop
+
 @section('js')
 <script>
     $(function() {
-        $("#datepicker").datepicker({
-            format: "yyyy", // Notice the Extra space at the beginning
-            viewMode: "years",
-            minViewMode: "years"
+        $(document).on('click', '#btn-edit-categories', function() {
+            let id = $(this).data('id');
+            let name = $(this).data('name');
+            let description = $(this).data('description');
+            $('#edit-name').val(name);
+            $('#edit-description').val(description);
+            $('#edit-id').val(id);
+
         });
-        $(document).on('click', '#btn-delete-brands', function() {
+
+        $(document).on('click', '#btn-delete-categories', function() {
             let id = $(this).data('id');
             let nama = $(this).data('name');
             $('#delete-id').val(id);
             $('#delete-nama').text(nama);
-            console.log("hallo");
         });
-
-
-        $(document).on('click', '#btn-edit-brands', function() {
-            let id = $(this).data('id');
-
-            $.ajax({
-                type: "get",
-                url: baseurl + '/admin/ajaxadmin/dataBrands/' + id,
-                dataType: 'json',
-                success: function(res) {
-                    console.log(res);
-                    $('#edit-name').val(res.name);
-                    $('#edit-description').val(res.description);
-                    $('#edit-id').val(res.id);
-                },
-            });
-        });
-
     });
-</script>
-@stop
-@section('js')
-<script>
-
 </script>
 @stop
