@@ -12,7 +12,7 @@ class MerekBarangController extends Controller
     {
         $user = Auth::user();
         $merek = Brands::all();
-        return view('merekBarang_v', compact('user', 'merek'));
+        return view('merek', compact('user', 'merek'));
     }
 
     public function add_brand(Request $req)

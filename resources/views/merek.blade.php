@@ -3,7 +3,7 @@
 @section('title', 'Merek Produk')
 
 @section('content_header')
-<h1 class="text-center text-bold">Merek Produk</h1>
+<h1 class="text-center text-bold">Merek</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Merek Produk Setting') }}
+                    {{ __('Merek Produk') }}
 
                 </div>
                 <div class="card-body">
@@ -27,7 +27,7 @@
                                 <th>NO</th>
                                 <th>NAMA MEREK PRODUK</th>
                                 <th>KETERANGAN</th>
-                                <th>ACTION</th>
+                                <th>AKSI</th>
 
                             </tr>
                         </thead>
