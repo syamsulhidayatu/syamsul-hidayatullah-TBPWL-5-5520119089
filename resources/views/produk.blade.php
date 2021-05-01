@@ -3,7 +3,7 @@
 @section('title', 'Pengelolaan Produk')
 
 @section('content_header')
-<h1 class="text-center text-bold">PENGELOLAAN PRODUK</h1>
+<h1 class="text-center">PRODUK</h1>
 @stop
 
 @section('content')
@@ -12,11 +12,11 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          {{ __('Pengelolaan Produk Setting') }}
+          {{ __('Pengelolaan Produk') }}
 
         </div>
         <div class="card-body">
-          <button class="btn btn-primary float-left mr-3" data-toggle="modal" data-target="#tambahData"><i class="fa fa-plus"></i> MENAMBAHKAN DATA PRODUK</button>
+          <button class="btn btn-primary float-left mr-3" data-toggle="modal" data-target="#tambahData"><i class="fa fa-plus"></i> TAMBAH DATA</button>
 
           <div class="btn-group mb-5" role="group" aria-label="Basis Example">
 
@@ -31,30 +31,30 @@
                 <th>MEREK</th>
                 <th>HARGA</th>
                 <th>STOK</th>
-                <th>ACTION</th>
+                <th>AKSI</th>
               </tr>
             </thead>
             <tbody>
               @php $no=1; @endphp
-              @foreach($barang as $key)
+              @foreach($barang as $prod)
               <tr>
                 <td>{{$no++}}</td>
                 <td>
-                  @if($key->photo !== null)
-                  <img src="{{ asset('storage/photo_barang/'.$key->photo) }}" width="100px" />
+                  @if($prod->photo !== null)
+                  <img src="{{ asset('storage/photo_barang/'.$prod->photo) }}" width="100px" />
                   @else
                   [Picture Not Found]
                   @endif
                 </td>
-                <td>{{$key->name}}</td>
-                <td>{{$key->categories_id}}</td>
-                <td>{{$key->brands_id}}</td>
-                <td>{{$key->harga}}</td>
-                <td>{{$key->stok}}</td>
+                <td>{{$prod->name}}</td>
+                <td>{{$prod->categories_id}}</td>
+                <td>{{$prod->brands_id}}</td>
+                <td>{{$prod->harga}}</td>
+                <td>{{$prod->stok}}</td>
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" id="btn-edit-buku" class="btn" data-toggle="modal" data-target="#editBukuModal" data-id="{{ $key->id }}"><i class="fa fa-edit"></i></button>
-                    <button type="button" id="btn-delete-buku" class="btn" data-toggle="modal" data-target="#deleteBukuModal" data-id="{{ $key->id }}" data-photo="{{ $key->photo }}"><i class="fa fa-trash"></i></button>
+                    <button type="button" id="btn-edit-buku" class="btn" data-toggle="modal" data-target="#editBukuModal" data-id="{{ $prod->id }}"><i class="fa fa-edit"></i></button>
+                    <button type="button" id="btn-delete-buku" class="btn" data-toggle="modal" data-target="#deleteBukuModal" data-id="{{ $prod->id }}" data-photo="{{ $prod->photo }}"><i class="fa fa-trash"></i></button>
                   </div>
                 </td>
               </tr>
@@ -102,15 +102,15 @@
           </div>
           <div class="form-group">
             <label for="categories_id">Kategori</label>
-            <!-- <input type="text" class="form-control" name="penerbit" id="penerbit" required /> -->
+      
             <div class="input-group">
               <select class="custom-select" name="categories_id" id="categories_id" placeholder="Masukan Kategori barang" id="inputGroupSelect04" aria-label="Example select with button addon">
                 <option selected>Pilih Kategori</option>
                 @php
                 $data=App\Models\Categories::get();
                 @endphp
-                @foreach($data as $key)
-                <option value="{{$key->id}}">{{$key->name}}</option>
+                @foreach($data as $prod)
+                <option value="{{$prod->id}}">{{$prod->name}}</option>
                 @endforeach
               </select>
 
@@ -118,15 +118,15 @@
           </div>
           <div class="form-group">
             <label for="brands_id">Merek</label>
-            <!-- <input type="text" class="form-control" name="penerbit" id="penerbit" required /> -->
+      
             <div class="input-group">
               <select class="custom-select" name="brands_id" id="brands_id" placeholder="Masukan Nama Brands" id="inputGroupSelect04" aria-label="Example select with button addon">
                 <option selected>Pilih Merek</option>
                 @php
                 $data=App\Models\Brands::get();
                 @endphp
-                @foreach($data as $key)
-                <option value="{{$key->id}}">{{$key->name}}</option>
+                @foreach($data as $prod)
+                <option value="{{$prod->id}}">{{$prod->name}}</option>
                 @endforeach
 
               </select>
@@ -153,7 +153,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Data Product</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -189,8 +189,8 @@
                     @php
                     $data=App\Models\Categories::get();
                     @endphp
-                    @foreach($data as $key)
-                    <option value="{{$key->id}}">{{$key->name}}</option>
+                    @foreach($data as $prod)
+                    <option value="{{$prod->id}}">{{$prod->name}}</option>
                     @endforeach
                   </select>
 
@@ -203,8 +203,8 @@
                     @php
                     $data=App\Models\Brands::get();
                     @endphp
-                    @foreach($data as $key)
-                    <option value="{{$key->id}}">{{$key->name}}</option>
+                    @foreach($data as $prod)
+                    <option value="{{$prod->id}}">{{$prod->name}}</option>
                     @endforeach
                   </select>
 
@@ -236,7 +236,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

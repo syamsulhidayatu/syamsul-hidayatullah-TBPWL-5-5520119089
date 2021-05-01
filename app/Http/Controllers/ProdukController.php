@@ -13,7 +13,7 @@ class ProdukController extends Controller
     {
         $user = Auth::user();
         $barang = Product::all();
-        return view('produk_v', compact('user', 'barang'));
+        return view('produk', compact('user', 'barang'));
     }
 
     public function add_product(Request $req)

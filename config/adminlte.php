@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Admin User',
+    'title' => 'admin syem',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,8 +45,8 @@ return [
     |
     */
 //Buat Logo login
-    'logo' => '<b>Auza Mobile Store</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/mobilestore1.jpg',
+    'logo' => '<b>syem storage</b>',
+    'logo_img' => 'vendor/adminlte/dist/img/IMG_0362.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -126,9 +126,9 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-white elevation-4',
+    'classes_sidebar' => 'sidebar-white -primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-primary navbar-light',
+    'classes_topnav' => 'navbar-light navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -149,7 +149,7 @@ return [
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
-    'sidebar_scrollbar_theme' => 'os-theme-light',
+    'sidebar_scrollbar_theme' => 'os-theme-dark',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
     'sidebar_nav_animation_speed' => 300,
@@ -236,32 +236,32 @@ return [
             'can' => 'isAdmin',
         ],
         [
-            'text'        => 'Akun User dan Admin',
-            'url'         => 'admin/akun_user_admin',
-            'icon'        => 'fas fa-users-cog',
+            'text'        => 'menu user',
+            'url'         => 'admin/user',
+            'icon'        => 'fas fa-address-card',
             'can' => 'isAdmin',
         ],
         [
-            'text'        => 'Pengelolaan Produk',
-            'url'         => 'admin/pengelolaan_produk',
-            'icon'        => 'fab fa-dropbox',
+            'text'        => 'menu produk',
+            'url'         => 'admin/produk',
+            'icon'        => 'fas fa-archway',
             'can' => 'isAdmin',
         ],
         [
-            'text'        => 'Kategori Produk',
-            'url'         => 'admin/kategori_produk',
-            'icon'        => 'fas fa-fw fa-folder-open',
+            'text'        => 'menu kategori',
+            'url'         => 'admin/kategori',
+            'icon'        => 'fas fa-archive',
             'can' => 'isAdmin',
         ],
         [
-            'text'        => 'Merek Produk',
-            'url'         => 'admin/merek_produk',
-            'icon'        => 'fas fa-clipboard-list',
+            'text'        => 'menu merk',
+            'url'         => 'admin/merek',
+            'icon'        => 'fab fa-apple',
             'can' => 'isAdmin',
         ],
         [
             'text'    => 'Laporan',
-            'icon'    => 'fas fa-file-archive',
+            'icon'    => 'fas fa-ambulance',
             'can' => 'isAdmin',
             'submenu' => [
                 [
@@ -277,77 +277,9 @@ return [
             ],
         ],
 
-        [
-            'text'        => 'Book',
-            'url'         => 'admin/books',
-            'icon'        => 'fas fa-fw fa-book',
-            'can'         => 'isAdmin',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'profile',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'profile',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        // [
-        //     'text'    => 'multilevel',
-        //     'icon'    => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text'    => 'level_one',
-        //             'url'     => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url'  => '#',
-        //                 ],
-        //                 [
-        //                     'text'    => 'level_two',
-        //                     'url'     => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //     ],
-        // ],
-        // ['header' => 'labels'],
-        // [
-        //     'text'       => 'important',
-        //     'icon_color' => 'red',
-        //     'url'        => '#',
-        // ],
-        // [
-        //     'text'       => 'warning',
-        //     'icon_color' => 'yellow',
-        //     'url'        => '#',
-        // ],
-        // [
-        //     'text'       => 'information',
-        //     'icon_color' => 'cyan',
-        //     'url'        => '#',
-        // ],
+       
+        
+       
     ],
 
     /*

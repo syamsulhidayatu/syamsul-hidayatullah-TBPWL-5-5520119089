@@ -17,17 +17,17 @@ class CreateUsersSeeder extends Seeder
         $user = [
             [
                 'name' => 'User',
-                'username' => 'auzahinzo',
-                'email' => 'auzahinzo@gmail.com',
-                'password' => bcrypt('auzahinzo'),
+                'username' => 'syemsul',
+                'email' => 'syem@gmail.com',
+                'password' => bcrypt('syemsul'),
                 'photo' => 'image.png',
                 'roles_id' => 2
             ],
             [
                 'name' => 'Admin',
-                'username' => 'mfarhan_20',
-                'email' => 'mf180053@gmail.com',
-                'password' => bcrypt('farhan123'),
+                'username' => 'syem_12',
+                'email' => 'syem12@gmail.com',
+                'password' => bcrypt('asyam123'),
                 'photo' => 'images.png',
                 'roles_id' => 1
             ]
