@@ -47,8 +47,8 @@
                   @endif
                 </td>
                 <td>{{$prod->name}}</td>
-                <td>{{$prod->categories_id}}</td>
-                <td>{{$prod->brands_id}}</td>
+                <td>{{$prod->kategori->name}}</td>
+                <td>{{$prod->merek->name}}</td>
                 <td>{{$prod->harga}}</td>
                 <td>{{$prod->stok}}</td>
                 <td>
